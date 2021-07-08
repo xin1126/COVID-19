@@ -1,38 +1,96 @@
-.wrap {
-	max-width: 1200px;
-	margin: 0 auto;
-	// .map-main {
-	// 	position: absolute;
-	// }
-	// .map.color {
-	// 	position: relative;
-	// 	font-size: 100px;
-	// 	bottom: 0;
-	// 	left: 0;
-	// 	z-index: 9999;
-	// }
-}
-
-.map-content {
-	text-align:center;
-	font: 14px/16px Trebuchet MS, Helvetica, Arial, sans-serif;
-	padding: 10px;
-	border: 1px solid #EBECED;
-	color: #edeef0;
-	position: absolute;
-	background: rgb(73, 73, 73);
-	background: linear-gradient(to bottom, rgba(73, 73, 73, 1) 0%, rgba(101, 101, 101, 1) 100%);
-}
-
-.map-text {
-	p {
-		font-weight:bolder;
-		margin-bottom: 4px;
+	.map-main {
+		position: relative;
 	}
-	li {
-		margin-bottom: 8px;
-		&:last-child {
-			margin-bottom: 0;
+	
+	.map-color {
+		position: absolute;
+		padding: 10px;
+		bottom: 0;
+		left: 0;
+		@include breakpoint(md) {
+			position: initial;
+			text-align: center;
+		}
+		p {
+			font-weight: bolder;
+			font-size: 24px;
+			margin-bottom: 8px;
+			@include breakpoint(xl) {
+				font-size: 20px;
+			}
+			@include breakpoint(lg) {
+				font-size: 18px;
+				margin-bottom: 4px;
+			}
+			@include breakpoint(md) {
+				margin-bottom: 8px;
+			}
+		}
+		ul {
+			@include breakpoint(md) {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: center;
+			}
+			li {
+				margin-bottom: 8px;
+				font-size: 20px;
+				@include breakpoint(xl) {
+					font-size: 16px;
+					margin-bottom: 4px;
+				}
+				@include breakpoint(lg) {
+					font-size: 14px;
+				}
+				@include breakpoint(md) {
+					margin-right: 4px;
+				}
+				@include breakpoint(sm) {
+					margin: 0 8px 8px 0;
+				}
+				&:nth-child(1) {
+					@include color(#FFE153)
+				}
+				&:nth-child(2) {
+					@include color(#FFBB77)
+				}
+				&:nth-child(3) {
+					@include color(#D26900)
+				}
+				&:nth-child(4) {
+					@include color(#FF2D2D)
+				}
+				&:nth-child(5) {
+					@include color(#AE0000)
+				}
+				&:nth-child(6) {
+					@include color(#2F0000)
+				}
+			}
 		}
 	}
-}
+	
+	.map-content {
+		text-align:center;
+		font: 14px/16px Trebuchet MS, Helvetica, Arial, sans-serif;
+		display: none;
+		padding: 10px;
+		border: 1px solid #EBECED;
+		color: #edeef0;
+		position: absolute;
+		background: rgb(73, 73, 73);
+		background: linear-gradient(to bottom, rgba(73, 73, 73, 1) 0%, rgba(101, 101, 101, 1) 100%);
+	}
+	
+	.map-text {
+		p {
+			font-weight:bolder;
+			margin-bottom: 4px;
+		}
+		li {
+			margin-bottom: 8px;
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}

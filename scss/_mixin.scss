@@ -12,8 +12,22 @@
       @content;
     }
   } @else if ($point == sm) {
-    @media only screen and(max-width: 767px) {
+    @media only screen and(max-width: 576px) {
       @content;
     }
+  }
+}
+
+@mixin color($color) {
+  span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: $color;
+    margin-right: 2px;
+    @include breakpoint(md) {
+				width: 10px;
+    height: 10px;
+			}
   }
 }
