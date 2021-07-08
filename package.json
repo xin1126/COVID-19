@@ -19,6 +19,7 @@
     "prettier-eslint": "^12.0.0"
   },
   "dependencies": {
-    "bootstrap": "^5.0.1"
+    "bootstrap": "^5.0.1",
+    "countup.js": "^2.0.7"
   }
 }

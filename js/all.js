@@ -1,5 +1,9 @@
 import mapConfig from './data.js';
 import addEvent from './mapKit.js';
+import { CountUp } from '../node_modules/countup.js/dist/countUp.min.js';
+
+const totalData = document.querySelector('#total-data');
+const error = document.querySelector('.error');
 
 const data = {};
 
@@ -20,12 +24,11 @@ const mapColor = () => {
     }
     mapConfig[mapItem[0]].hover = `
     <div class="map-text">
-      <p style="color : ${mapConfig[mapItem[0]].upColor}">${mapItem[1].title}</p>
-      <ul>
-        <li>確診總數：${data[mapItem[1].area]}</li>
-        <li>確診總數：${data[mapItem[1].area]}</li>
-        <li>確診總數：${data[mapItem[1].area]}</li>
-      </ul>
+    <p style="color : ${mapConfig[mapItem[0]].upColor}">${mapItem[1].title}</p>
+    <ul>
+    <li>確診總數：${data[mapItem[1].area]?.toLocaleString()}</li>
+    <li>確診總數：${data[mapItem[1].area]}</li>
+    </ul>
     </div>
     `;
     if (!data[mapItem[1].area]) {
@@ -40,7 +43,7 @@ const monitor = () => {
   }
 };
 
-const getProducts = () => {
+const getCountries = () => {
   const url = 'https://corona.lmao.ninja/v3/covid-19/countries';
   fetch(url, {})
     .then((response) => response.json())
@@ -50,8 +53,40 @@ const getProducts = () => {
       });
       mapColor();
       monitor();
-    }).catch((err) => {
-      console.log('錯誤:', err);
+    }).catch(() => {
+      error.style.display = 'flex';
     });
 };
-getProducts();
+
+const getTotalData = () => {
+  const url = 'https://corona.lmao.ninja/v3/covid-19/all';
+  fetch(url, {})
+    .then((response) => response.json())
+    .then((jsonData) => {
+      totalData.innerHTML = `
+    <ul class="total-data">
+    <li><p>總人口數</p><span id="population"></span></li>
+    <li><p>總確診數</p><span id="cases"></span></li>
+    <li><p>總死亡數</p><span id="deaths"></span></li>
+    </ul>`;
+      const countOptions = {
+        useEasing: true,
+        separator: '',
+      };
+      const population = new CountUp('population', jsonData.population, 0, 5, countOptions);
+      const cases = new CountUp('cases', jsonData.cases, 0, 5, countOptions);
+      const deaths = new CountUp('deaths', jsonData.deaths, 0, 5, countOptions);
+      population.start();
+      cases.start();
+      deaths.start();
+    }).catch(() => {
+      error.style.display = 'flex';
+    });
+};
+
+const init = () => {
+  getCountries();
+  getTotalData();
+};
+
+init();

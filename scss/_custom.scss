@@ -41,9 +41,7 @@
 				}
 				@include breakpoint(lg) {
 					font-size: 14px;
-				}
-				@include breakpoint(md) {
-					margin-right: 4px;
+					margin-right: 8px;
 				}
 				@include breakpoint(sm) {
 					margin: 0 8px 8px 0;
@@ -94,3 +92,71 @@
 			}
 		}
 	}
+	
+	.total-data {
+		display: flex;
+		justify-content: space-around;
+		margin-bottom: 24px;
+		@include breakpoint(sm) {
+			display: block;
+		}
+		li {
+			margin-right: 10px;
+			font-size: 48px;
+			text-align: center;
+			@include breakpoint(lg) {
+				font-size: 40px;
+				border-bottom: gray solid 1px;
+				width: 50%;
+				margin: 0 auto;
+				padding-bottom: 10px;
+			}
+			@include breakpoint(md) {
+				font-size: 28px;
+			}
+			@include breakpoint(sm) {
+				margin-bottom: 16px;
+			}
+			&:nth-child(1) {
+				color: green;
+			}
+			&:nth-child(2) {
+				color: darkred;
+			}
+			&:nth-child(3) {
+				color: darkred;
+			}
+			p {
+				color: black;
+				text-align: center;
+				font-weight: bolder;
+				margin-bottom: 8px;
+				font-size: 24px;
+				@include breakpoint(md) {
+					font-size: 18px;
+				}
+			}
+		}
+	}
+	.error {
+		position: absolute;
+		top:50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 1;
+		width: 100%;
+		@include flex-center;
+		.text {
+			background-color: white;
+			padding: 10px;
+			font-size: 40px;
+			@include breakpoint(md) {
+				font-size: 32px;
+			}
+			@include breakpoint(sm) {
+				font-size: 18px;
+			}
+		}
+		display: none;
+	}
+	

@@ -143,6 +143,7 @@ table {
 .wrap {
   max-width: 1200px;
   margin: 0 auto;
+  margin-top: 40px;
   padding-left: 15px;
   padding-right: 15px;
 }
@@ -227,12 +228,7 @@ table {
 @media only screen and (max-width: 992px) {
   .map-color ul li {
     font-size: 14px;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .map-color ul li {
-    margin-right: 4px;
+    margin-right: 8px;
   }
 }
 
@@ -356,5 +352,112 @@ table {
 
 .map-text li:last-child {
   margin-bottom: 0;
+}
+
+.total-data {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin-bottom: 24px;
+}
+
+@media only screen and (max-width: 576px) {
+  .total-data {
+    display: block;
+  }
+}
+
+.total-data li {
+  margin-right: 10px;
+  font-size: 48px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 992px) {
+  .total-data li {
+    font-size: 40px;
+    border-bottom: gray solid 1px;
+    width: 50%;
+    margin: 0 auto;
+    padding-bottom: 10px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .total-data li {
+    font-size: 28px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .total-data li {
+    margin-bottom: 16px;
+  }
+}
+
+.total-data li:nth-child(1) {
+  color: green;
+}
+
+.total-data li:nth-child(2) {
+  color: darkred;
+}
+
+.total-data li:nth-child(3) {
+  color: darkred;
+}
+
+.total-data li p {
+  color: black;
+  text-align: center;
+  font-weight: bolder;
+  margin-bottom: 8px;
+  font-size: 24px;
+}
+
+@media only screen and (max-width: 768px) {
+  .total-data li p {
+    font-size: 18px;
+  }
+}
+
+.error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  z-index: 1;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: none;
+}
+
+.error .text {
+  background-color: white;
+  padding: 10px;
+  font-size: 40px;
+}
+
+@media only screen and (max-width: 768px) {
+  .error .text {
+    font-size: 32px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .error .text {
+    font-size: 18px;
+  }
 }
 /*# sourceMappingURL=all.css.map */
