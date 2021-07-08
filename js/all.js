@@ -28,6 +28,9 @@ const mapColor = () => {
       </ul>
     </div>
     `;
+    if (!data[mapItem[1].area]) {
+      mapConfig[mapItem[0]].hover = `<p style="margin-bottom : 4px">${mapItem[1].title}</p><p>未知</p>`;
+    }
   });
 };
 

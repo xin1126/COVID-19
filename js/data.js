@@ -123,7 +123,7 @@ export default {
     area: 'CYPRUS', title: '賽普勒斯', hover: 'CYPRUS', upColor: '#eff9ff', overColor: '#ffcc5f', downColor: '#477cb2', enable: true,
   },
   map_41: {
-    area: 'CZECH REPUBLIC', title: '捷克', hover: 'CZECH REPUBLIC', upColor: '#eff9ff', overColor: '#ffcc5f', downColor: '#477cb2', enable: true,
+    area: 'CZECHIA', title: '捷克', hover: 'CZECH REPUBLIC', upColor: '#eff9ff', overColor: '#ffcc5f', downColor: '#477cb2', enable: true,
   },
   map_42: {
     area: "CÔTE D'IVOIRE", title: '象牙海岸', hover: "CÔTE D'IVOIRE", upColor: '#eff9ff', overColor: '#ffcc5f', downColor: '#477cb2', enable: true,
@@ -168,7 +168,7 @@ export default {
     area: 'FINLAND', title: '芬蘭', hover: 'FINLAND', upColor: '#eff9ff', overColor: '#ffcc5f', downColor: '#477cb2', enable: true,
   },
   map_56: {
-    area: '法國', title: '阿富汗', hover: 'FRANCE', upColor: '#eff9ff', overColor: '#ffcc5f', downColor: '#477cb2', enable: true,
+    area: 'FRANCE', title: '法國', hover: 'FRANCE', upColor: '#eff9ff', overColor: '#ffcc5f', downColor: '#477cb2', enable: true,
   },
   map_57: {
     area: 'FRENCH GUIANA', title: '法屬圭亞那', hover: 'FRENCH GUIANA', upColor: '#eff9ff', overColor: '#ffcc5f', downColor: '#477cb2', enable: true,
@@ -261,7 +261,7 @@ export default {
     area: 'KYRGYZSTAN', title: '吉爾吉斯斯坦', hover: 'KYRGYZSTAN', upColor: '#eff9ff', overColor: '#ffcc5f', downColor: '#477cb2', enable: true,
   },
   map_87: {
-    area: 'LAOS', title: '寮國', hover: 'LAOS', upColor: '#eff9ff', overColor: '#ffcc5f', downColor: '#477cb2', enable: true,
+    area: "LAO PEOPLE'S DEMOCRATIC REPUBLIC", title: '寮國', hover: 'LAOS', upColor: '#eff9ff', overColor: '#ffcc5f', downColor: '#477cb2', enable: true,
   },
   map_88: {
     area: 'LATVIA', title: '拉脫維亞', hover: 'LATVIA', upColor: '#eff9ff', overColor: '#ffcc5f', downColor: '#477cb2', enable: true,
@@ -468,7 +468,7 @@ export default {
     area: 'SWITZERLAND', title: '瑞士', hover: 'SWITZERLAND', upColor: '#eff9ff', overColor: '#ffcc5f', downColor: '#477cb2', enable: true,
   },
   map_156: {
-    area: 'SYRIA', title: '敘利亞', hover: 'SYRIA', upColor: '#eff9ff', overColor: '#ffcc5f', downColor: '#477cb2', enable: true,
+    area: 'SYRIAN ARAB REPUBLIC', title: '敘利亞', hover: 'SYRIA', upColor: '#eff9ff', overColor: '#ffcc5f', downColor: '#477cb2', enable: true,
   },
   map_157: {
     area: 'SÃO TOMÉ AND PRÍNCIPE', title: '聖多美普林西比', hover: 'SÃO TOMÉ AND PRÍNCIPE', upColor: '#eff9ff', overColor: '#ffcc5f', downColor: '#477cb2', enable: true,
