@@ -1,0 +1,28 @@
+.map-wrapper {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.map-content {
+	text-align:center;
+	font: 14px/16px Trebuchet MS, Helvetica, Arial, sans-serif;
+	padding: 10px;
+	border: 1px solid #EBECED;
+	color: #edeef0;
+	position: absolute;
+	background: rgb(73, 73, 73);
+	background: linear-gradient(to bottom, rgba(73, 73, 73, 1) 0%, rgba(101, 101, 101, 1) 100%);
+}
+
+.map-text {
+	p {
+		font-weight:bolder;
+		margin-bottom: 4px;
+	}
+	li {
+		margin-bottom: 8px;
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
