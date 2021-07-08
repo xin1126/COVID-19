@@ -1,6 +1,6 @@
+import { CountUp } from 'countup.js';
 import mapConfig from './data.js';
 import addEvent from './mapKit.js';
-import { CountUp } from '../node_modules/countup.js/dist/countUp.min.js';
 
 const totalData = document.querySelector('#total-data');
 const error = document.querySelector('.error');
