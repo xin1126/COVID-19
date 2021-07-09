@@ -5,33 +5,37 @@ import addEvent from './mapKit.js';
 const totalData = document.querySelector('#total-data');
 const error = document.querySelector('.error');
 
-const data = {};
+const countryTotal = {};
 
 const mapColor = () => {
   Object.entries(mapConfig).forEach((mapItem) => {
-    if (data[mapItem[1].area] > 10000000) {
+    const data = countryTotal[mapItem[1].area]?.cases;
+    if (data > 10000000) {
       mapConfig[mapItem[0]].upColor = '#2F0000';
-    } else if (data[mapItem[1].area] > 1000000 && data[mapItem[1].area] <= 10000000) {
+    } else if (data > 1000000 && data <= 10000000) {
       mapConfig[mapItem[0]].upColor = '#AE0000';
-    } else if (data[mapItem[1].area] > 100000 && data[mapItem[1].area] <= 1000000) {
+    } else if (data > 100000 && data <= 1000000) {
       mapConfig[mapItem[0]].upColor = '#FF2D2D';
-    } else if (data[mapItem[1].area] > 10000 && data[mapItem[1].area] <= 100000) {
+    } else if (data > 10000 && data <= 100000) {
       mapConfig[mapItem[0]].upColor = '#D26900';
-    } else if (data[mapItem[1].area] > 1000 && data[mapItem[1].area] <= 10000) {
+    } else if (data > 1000 && data <= 10000) {
       mapConfig[mapItem[0]].upColor = '#FFBB77';
-    } else if (data[mapItem[1].area] <= 1000) {
+    } else if (data <= 1000) {
       mapConfig[mapItem[0]].upColor = '#FFE153';
     }
     mapConfig[mapItem[0]].hover = `
     <div class="map-text">
-    <p style="color : ${mapConfig[mapItem[0]].upColor}">${mapItem[1].title}</p>
-    <ul>
-    <li>確診總數：${data[mapItem[1].area]?.toLocaleString()}</li>
-    <li>確診總數：${data[mapItem[1].area]}</li>
-    </ul>
+      <p style="color : ${mapConfig[mapItem[0]].upColor}">${mapItem[1].title}</p>
+      <ul>
+        <li><img src="${countryTotal[mapItem[1].area]?.countryInfo.flag}" alt="${mapItem[1].title}" /></li>
+        <li>該國家人口：${countryTotal[mapItem[1].area]?.population?.toLocaleString()}</li>
+        <li>確診總數：${countryTotal[mapItem[1].area]?.cases?.toLocaleString()}</li>
+        <li>死亡總數：${countryTotal[mapItem[1].area]?.deaths?.toLocaleString()}</li>
+        <li>痊癒總數：${countryTotal[mapItem[1].area]?.recovered?.toLocaleString()}</li>
+      </ul>
     </div>
     `;
-    if (!data[mapItem[1].area]) {
+    if (!countryTotal[mapItem[1].area]) {
       mapConfig[mapItem[0]].hover = `<p style="margin-bottom : 4px">${mapItem[1].title}</p><p>未知</p>`;
     }
   });
@@ -49,7 +53,7 @@ const getCountries = () => {
     .then((response) => response.json())
     .then((jsonData) => {
       jsonData.forEach((item) => {
-        data[(item.country).toUpperCase()] = item.cases;
+        countryTotal[(item.country).toUpperCase()] = { ...item };
       });
       mapColor();
       monitor();

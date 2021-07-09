@@ -1,6 +1,7 @@
 /* eslint-disable */
 //套件方法
 import mapConfig from './data.js';
+import $ from "jquery";
 
 const pin_config = {
   'default': { 'pinShadow': '#000', 'pinShadowOpacity': '50', },

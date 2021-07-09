@@ -26,9 +26,9 @@
     background-color: $color;
     margin-right: 2px;
     @include breakpoint(md) {
-				width: 10px;
-    height: 10px;
-			}
+      width: 10px;
+      height: 10px;
+    }
   }
 }
 
