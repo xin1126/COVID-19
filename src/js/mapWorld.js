@@ -5,7 +5,6 @@ import addEvent from './mapKit.js';
 const totalWorld = document.querySelector('#total-world');
 const tableWorld = document.querySelector('#table-world');
 const error = document.querySelector('.error');
-
 const totalCountry = {};
 
 const renderMapWorld = (map, content) => {
@@ -120,9 +119,11 @@ const getTotalWorldData = () => {
     .catch(() => { error.style.display = 'flex'; });
 };
 
-const init = () => {
+const initWorld = () => {
   getCountries();
   getTotalWorldData();
 };
 
-init();
+if (window.location.href.indexOf('world') > 0) {
+  initWorld();
+}
