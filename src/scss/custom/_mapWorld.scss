@@ -1,8 +1,15 @@
-.map-main {
+.main-world {
 	position: relative;
+	margin-bottom: 48px;
+	@include breakpoint(md) {
+		margin-bottom: 24px;
+	}
+	@include breakpoint(sm) {
+		margin-bottom: 0px;
+	}
 }
 
-.map-color {
+.color-world {
 	position: absolute;
 	padding: 10px;
 	bottom: 0;
@@ -68,16 +75,21 @@
 	}
 }
 
-.map-content {
+.content-world {
 	font: 14px/16px Trebuchet MS, Helvetica, Arial, sans-serif;
 	display: none;
 	padding: 10px;
 	color: #edeef0;
 	position: absolute;
 	background: #eeeeee;
+	@include breakpoint(sm) {
+		top: 72% !important;
+		left: 50% !important;
+		transform: translate(-50%, -50%);
+	}
 }
 
-.map-text {
+.text-world {
 	p {
 		font-size: 24px;
 		font-weight:bolder;
@@ -86,28 +98,46 @@
 	}
 	li {
 		padding-left: 25px;
+		font-size: 18px;
+		margin-bottom: 12px;
+		color: black;
 		&:first-child() {
 			padding-left: 0	;
+		}
+		&:last-child {
+			margin-bottom: 0;
+		}
+		@include breakpoint(sm) {
+			padding: 0;
+			margin-bottom: 16px;
+			@include flex-center;
+			flex-flow: column;
 		}
 		img {
 			width: 50%;
 			margin: 0 auto;
 		}
-		font-size: 18px;
-		margin-bottom: 8px;
-		color: black;
-		&:last-child {
-			margin-bottom: 0;
+		span {
+			span {
+				@include breakpoint(sm) {
+					display: none;
+				}
+			}
+			@include breakpoint(sm) {
+				margin-bottom: 8px;
+			}
 		}
 	}
 }
 
-.total-data {
+.total-world {
 	display: flex;
 	justify-content: space-around;
 	margin-bottom: 24px;
 	@include breakpoint(sm) {
-		display: block;
+		flex-flow: column;
+		align-items: center;
+		margin-bottom: 16px;
 	}
 	li {
 		margin-right: 10px;
@@ -115,7 +145,6 @@
 		text-align: center;
 		@include breakpoint(lg) {
 			font-size: 40px;
-			border-bottom: gray solid 1px;
 			width: 50%;
 			margin: 0 auto;
 			padding-bottom: 10px;
@@ -125,6 +154,9 @@
 		}
 		@include breakpoint(sm) {
 			margin-bottom: 16px;
+			&:last-child {
+				margin-bottom: 0;
+			}
 		}
 		&:nth-child(1) {
 			color: green;
@@ -145,8 +177,45 @@
 				font-size: 18px;
 			}
 		}
+		span {
+			display: block;
+			@include breakpoint(sm) {
+				display: inline-block;
+				padding: 0 6px 4px;
+				border-bottom: gray solid 1px;
+			}
+		}
 	}
 }
+
+.table-world {
+	width: 100%;
+	thead {
+		background-color: #595959;
+		tr > th {
+			padding: 10px 0;
+			color: white;
+			font-weight: bolder;
+			font-size: 18px;
+			@include breakpoint(sm) {
+					font-size: 16px;
+				}
+			&:nth-child(2) {
+				width: 10%;
+				@include breakpoint(lg) {
+					width: 25%;
+				}
+			}
+		}
+	}
+	tbody {
+		tr > td {
+			padding: 10px 0;
+			border-bottom:#cecece solid 1px ;
+		}
+	}
+}
+
 .error {
 	position: absolute;
 	top:50%;

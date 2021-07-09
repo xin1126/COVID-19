@@ -1,0 +1,27 @@
+.d-none {
+  display: none;
+}
+
+.d-lg-none {
+  @include breakpoint(lg) {
+    display: none;
+  }
+}
+
+.d-md-none {
+  @include breakpoint(md) {
+    display: none;
+  }
+}
+
+.d-sm-none {
+  @include breakpoint(sm) {
+    display: none;
+  }
+}
+
+.d-mobile-none {
+  @media only screen and(max-width: 400px) {
+    display: none;
+  }
+}

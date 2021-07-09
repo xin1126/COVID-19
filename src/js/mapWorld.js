@@ -2,14 +2,70 @@ import { CountUp } from 'countup.js';
 import mapConfig from './data.js';
 import addEvent from './mapKit.js';
 
-const totalData = document.querySelector('#total-data');
+const totalWorld = document.querySelector('#total-world');
+const tableWorld = document.querySelector('#table-world');
 const error = document.querySelector('.error');
 
-const countryTotal = {};
+const totalCountry = {};
 
-const mapColor = () => {
+const renderMapWorld = (map, content) => {
+  mapConfig[map].hover = `
+    <div class="text-world">
+      <p style="color : ${mapConfig[map].upColor}">${content.title}</p>
+      <ul>
+        <li><img src="${totalCountry[content.area]?.countryInfo.flag}" alt="${content}" /></li>
+        <li><span>人口總數<span>：</span></span>${totalCountry[content.area]?.population?.toLocaleString()}</li>
+        <li><span>確診總數<span>：</span></span>${totalCountry[content.area]?.cases?.toLocaleString()}</li>
+        <li><span>死亡總數<span>：</span></span>${totalCountry[content.area]?.deaths?.toLocaleString()}</li>
+        <li><span>痊癒總數<span>：</span></span>${totalCountry[content.area]?.recovered?.toLocaleString()}</li>
+      </ul>
+    </div>
+    `;
+  if (!totalCountry[content.area]) {
+    mapConfig[map].hover = `<p style="margin-bottom : 4px">${content.title}</p><p>未知</p>`;
+  }
+};
+
+const renderTotalWorldData = (data) => {
+  totalWorld.innerHTML = `
+    <ul class="total-world">
+    <li><p>總人口數</p><span id="population"></span></li>
+    <li><p>總確診數</p><span id="cases"></span></li>
+    <li><p>總死亡數</p><span id="deaths"></span></li>
+    </ul>`;
+  const countOptions = {
+    useEasing: true,
+    separator: '',
+  };
+  const population = new CountUp('population', data.population, 0, 5, countOptions);
+  const cases = new CountUp('cases', data.cases, 0, 5, countOptions);
+  const deaths = new CountUp('deaths', data.deaths, 0, 5, countOptions);
+  population.start();
+  cases.start();
+  deaths.start();
+};
+
+const renderTableWorld = (data) => {
+  const newArr = data.sort((a, b) => b[1].cases - a[1].cases);
+  let str = '';
+  newArr.forEach((item, index) => {
+    str += `<tr>
+      <td>${index + 1}</td>
+      <td>${item[1].title}</td>
+      <td class="d-mobile-none"><img src="${item[1].countryInfo.flag}" alt="${item[1].title}" /></td>
+      <td class="d-sm-none">${item[1].population.toLocaleString()}</td>
+      <td>${item[1].cases.toLocaleString()}</td>
+      <td>${item[1].deaths.toLocaleString()}</td>
+      <td class="d-md-none">${item[1].recovered.toLocaleString()}</td>
+      <td class="d-lg-none">${new Date(item[1].updated).toLocaleString().split(' ')}</td>
+    </tr>`;
+  });
+  tableWorld.innerHTML = str;
+};
+
+const mapWorldColor = () => {
   Object.entries(mapConfig).forEach((mapItem) => {
-    const data = countryTotal[mapItem[1].area]?.cases;
+    const data = totalCountry[mapItem[1].area]?.cases;
     if (data > 10000000) {
       mapConfig[mapItem[0]].upColor = '#2F0000';
     } else if (data > 1000000 && data <= 10000000) {
@@ -23,21 +79,7 @@ const mapColor = () => {
     } else if (data <= 1000) {
       mapConfig[mapItem[0]].upColor = '#FFE153';
     }
-    mapConfig[mapItem[0]].hover = `
-    <div class="map-text">
-      <p style="color : ${mapConfig[mapItem[0]].upColor}">${mapItem[1].title}</p>
-      <ul>
-        <li><img src="${countryTotal[mapItem[1].area]?.countryInfo.flag}" alt="${mapItem[1].title}" /></li>
-        <li>該國家人口：${countryTotal[mapItem[1].area]?.population?.toLocaleString()}</li>
-        <li>確診總數：${countryTotal[mapItem[1].area]?.cases?.toLocaleString()}</li>
-        <li>死亡總數：${countryTotal[mapItem[1].area]?.deaths?.toLocaleString()}</li>
-        <li>痊癒總數：${countryTotal[mapItem[1].area]?.recovered?.toLocaleString()}</li>
-      </ul>
-    </div>
-    `;
-    if (!countryTotal[mapItem[1].area]) {
-      mapConfig[mapItem[0]].hover = `<p style="margin-bottom : 4px">${mapItem[1].title}</p><p>未知</p>`;
-    }
+    renderMapWorld(mapItem[0], mapItem[1]);
   });
 };
 
@@ -47,50 +89,40 @@ const monitor = () => {
   }
 };
 
+const processWorldData = (data) => {
+  data.forEach((item) => {
+    totalCountry[(item.country).toUpperCase()] = { ...item };
+  });
+  Object.entries(mapConfig).forEach((item) => {
+    if (totalCountry[item[1].area]) {
+      totalCountry[item[1].area].title = item[1].title;
+    }
+  });
+  const newArr = Object.entries(totalCountry).filter((item) => item[1].title !== undefined);
+  mapWorldColor();
+  monitor();
+  renderTableWorld(newArr);
+};
+
 const getCountries = () => {
   const url = 'https://corona.lmao.ninja/v3/covid-19/countries';
   fetch(url, {})
     .then((response) => response.json())
-    .then((jsonData) => {
-      jsonData.forEach((item) => {
-        countryTotal[(item.country).toUpperCase()] = { ...item };
-      });
-      mapColor();
-      monitor();
-    }).catch(() => {
-      error.style.display = 'flex';
-    });
+    .then((jsonData) => processWorldData(jsonData))
+    .catch(() => { error.style.display = 'flex'; });
 };
 
-const getTotalData = () => {
+const getTotalWorldData = () => {
   const url = 'https://corona.lmao.ninja/v3/covid-19/all';
   fetch(url, {})
     .then((response) => response.json())
-    .then((jsonData) => {
-      totalData.innerHTML = `
-    <ul class="total-data">
-    <li><p>總人口數</p><span id="population"></span></li>
-    <li><p>總確診數</p><span id="cases"></span></li>
-    <li><p>總死亡數</p><span id="deaths"></span></li>
-    </ul>`;
-      const countOptions = {
-        useEasing: true,
-        separator: '',
-      };
-      const population = new CountUp('population', jsonData.population, 0, 5, countOptions);
-      const cases = new CountUp('cases', jsonData.cases, 0, 5, countOptions);
-      const deaths = new CountUp('deaths', jsonData.deaths, 0, 5, countOptions);
-      population.start();
-      cases.start();
-      deaths.start();
-    }).catch(() => {
-      error.style.display = 'flex';
-    });
+    .then((jsonData) => renderTotalWorldData(jsonData))
+    .catch(() => { error.style.display = 'flex'; });
 };
 
 const init = () => {
   getCountries();
-  getTotalData();
+  getTotalWorldData();
 };
 
 init();

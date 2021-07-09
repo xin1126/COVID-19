@@ -13,8 +13,8 @@
     <div class="error">
       <div class="text">發生錯誤，請嘗試重新整理此頁面</div>
     </div>
-    <div id="total-data"></div>
-    <div class="map-main">
+    <div id="total-world"></div>
+    <div class="main-world">
       <svg version="1.1" viewBox="0 0 1000 500" xml:space="preserve">
         <g id="countries">
           <path id="map_1" vector-effect="non-scaling-stroke" fill="#EBECED"
@@ -380,7 +380,7 @@
         </g>
         <g id="map_points"></g>
       </svg>
-      <div class="map-color">
+      <div class="color-world">
         <p>確診病例數</p>
         <ul>
           <li><span></span>1千以下</li>
@@ -392,8 +392,24 @@
         </ul>
       </div>
     </div>
+    <table class="table-world">
+      <thead>
+        <tr>
+          <th scope="col">排名</th>
+          <th scope="col">國家</th>
+          <th scope="col" width="10%" class="d-mobile-none">國旗</th>
+          <th scope="col" class="d-sm-none">總人口數</th>
+          <th scope="col">總確診數</th>
+          <th scope="col">總死亡數</th>
+          <th scope="col" class="d-md-none">總痊癒數</th>
+          <th scope="col" class="d-lg-none">更新時間</th>
+        </tr>
+      </thead>
+      <tbody id="table-world">
+      </tbody>
+    </table>
   </div>
-  <span id="map-tip" class="map-content"></span>
+  <span id="map-tip" class="content-world"></span>
   <script src="../dist/index.js"></script>
 </body>
 
