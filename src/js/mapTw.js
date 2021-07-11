@@ -1,20 +1,45 @@
 import dataTw from './dataTw.js';
 
-// const path = document.querySelectorAll('path');
+const path = document.querySelectorAll('path');
 const error = document.querySelector('.error');
+const contentTw = document.querySelector('.content-tw');
 
 const totalTownship = {};
+const newTotalTownship = {};
 
-// path.forEach((item) => {
-//   item.addEventListener('mouseenter', (e) => {
-//     if (e.target.getAttribute('data-name') === 'taipei_city') {
-//       item.setAttribute('fill', '#2F0000');
-//     }
-//   });
-// });
+const mapTw = () => {
+  let tempColor;
+  window.onload = () => {
+    document.onmousemove = (e) => {
+      const st = document.body.scrollTop || document.documentElement.scrollTop;
+      const sl = document.body.scrollLeft || document.documentElement.scrollLeft;
+      const left = e.clientX;
+      const top = e.clientY;
+      contentTw.style.left = `${left + sl}px`;
+      contentTw.style.top = `${top + st + 30}px`;
+    };
+  };
+  path.forEach((item) => {
+    item.addEventListener('mouseenter', (e) => {
+      const target = newTotalTownship[e.target.getAttribute('data-name')];
+      contentTw.classList.remove('d-none');
+      item.setAttribute('fill', '#477cb2');
+      tempColor = target.color;
+      contentTw.innerHTML = `
+      <div class="text-tw">
+        <h2 style="color : ${target.color}">${target.place}</h2>
+        <p>確診總數：${target.case.toLocaleString()}</p>
+      </div>
+      `;
+    });
+    item.addEventListener('mouseout', () => {
+      contentTw.classList.add('d-none');
+      item.setAttribute('fill', tempColor);
+    });
+  });
+};
 
 const mapTwColor = () => {
-  const tempData = {};
   Object.entries(totalTownship).forEach((townshipItem) => {
     dataTw.forEach((dataItem, index) => {
       if (townshipItem[0] === dataItem.place) {
@@ -30,14 +55,14 @@ const mapTwColor = () => {
           dataTw[index].color = '#FFBB77';
         }
         [, dataTw[index].case] = townshipItem;
-        tempData[dataItem.tag] = { ...dataItem };
+        newTotalTownship[dataItem.tag] = { ...dataItem };
       }
     });
   });
-  if (Object.keys(tempData).indexOf('kinmen_country') < 0) {
-    tempData.kinmen_country = { case: 0, color: 'green' };
+  if (Object.keys(newTotalTownship).indexOf('kinmen_country') < 0) {
+    newTotalTownship.kinmen_country = { case: 0, color: 'green', place: '金門縣' };
   }
-  Object.entries(tempData).forEach((dataItem) => {
+  Object.entries(newTotalTownship).forEach((dataItem) => {
     const dom = document.querySelectorAll(`path[data-name=${dataItem[0]}`);
     dom.forEach((item) => {
       item.setAttribute('fill', dataItem[1].color);
@@ -64,4 +89,5 @@ const getTotalTwData = () => {
 
 if (window.location.href.indexOf('taiwan') > 0) {
   getTotalTwData();
+  mapTw();
 }

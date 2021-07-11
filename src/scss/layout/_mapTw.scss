@@ -1,17 +1,12 @@
-$color_gold: #B99362;
 .main-tw {
+  position: relative;
   svg {
     height: 100vh;
   }
   path {
     stroke: white;
-    // fill: transparent;
     transition: 0.5s;
     cursor: pointer;
-    &:hover {
-      // fill: white;
-      // transform: translate(-5px,-5px);
-    }
   }
   .title_area {
     position: absolute;
@@ -30,6 +25,25 @@ $color_gold: #B99362;
   }
 }
 
-.bg-test {
-  background-color: blue;
+.color-tw {
+	@include color-base(100px,green);
+}
+
+.content-tw {
+  background: #eeeeee;
+  position: absolute;
+  padding: 10px;
+  box-shadow: 0 8px 16px rgba(0,0,0,.15);
+}
+
+.text-tw {
+	h2 {
+    font-size: 24px;
+		font-weight:bolder;
+		margin-bottom: 10px;
+		text-align: center;
+  }
+  p {
+    font-size: 18px;
+  }
 }

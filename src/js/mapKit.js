@@ -1,6 +1,6 @@
 /* eslint-disable */
 //套件方法
-import mapConfig from './dataWorld.js';
+import mapConfig from './dataWorld';
 import $ from "jquery";
 
 const pin_config = {
@@ -18,9 +18,7 @@ $(() => {
   }
 
   $('#map-tip').css({
-    'box-shadow': `1px 2px 4px ${mapConfig.default.hoverShadow}`,
-    '-moz-box-shadow': `2px 3px 6px ${mapConfig.default.hoverShadow}`,
-    '-webkit-box-shadow': `2px 3px 6px ${mapConfig.default.hoverShadow}`,
+    'box-shadow': '0 8px 16px rgba(0,0,0,.15)',
   });
 
   if ($('#shadow').find('path').eq(0).attr('fill') != 'undefined') {
