@@ -26,7 +26,7 @@
 }
 
 .color-tw {
-	@include color-base(100px,green);
+  @include color-base(100px,green);
 }
 
 .content-tw {
@@ -37,11 +37,11 @@
 }
 
 .text-tw {
-	h2 {
+  h2 {
     font-size: 24px;
-		font-weight:bolder;
-		margin-bottom: 10px;
-		text-align: center;
+    font-weight:bolder;
+    margin-bottom: 10px;
+    text-align: center;
   }
   p {
     font-size: 18px;

@@ -136,8 +136,8 @@
 			font-weight: bolder;
 			font-size: 18px;
 			@include breakpoint(sm) {
-					font-size: 16px;
-				}
+				font-size: 16px;
+			}
 			&:nth-child(2) {
 				width: 10%;
 				@include breakpoint(lg) {

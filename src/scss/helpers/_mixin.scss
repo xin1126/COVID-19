@@ -34,70 +34,70 @@
 
 @mixin color-base($px,$color) {
   position: absolute;
-	padding: 10px;
-	bottom: $px;
-	left: 0;
-	@include breakpoint(md) {
-		position: initial;
-		text-align: center;
-	}
-	p {
-		font-weight: bolder;
-		font-size: 24px;
-		margin-bottom: 8px;
-		@include breakpoint(xl) {
-			font-size: 20px;
-		}
-		@include breakpoint(lg) {
-			font-size: 18px;
-			margin-bottom: 4px;
-		}
-		@include breakpoint(md) {
-			margin-bottom: 8px;
-		}
-	}
-	ul {
-		@include breakpoint(md) {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: center;
-		}
-		li {
+  padding: 10px;
+  bottom: $px;
+  left: 0;
+  @include breakpoint(md) {
+    position: initial;
+    text-align: center;
+  }
+  p {
+    font-weight: bolder;
+    font-size: 24px;
+    margin-bottom: 8px;
+    @include breakpoint(xl) {
+      font-size: 20px;
+    }
+    @include breakpoint(lg) {
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+    @include breakpoint(md) {
+      margin-bottom: 8px;
+    }
+  }
+  ul {
+    @include breakpoint(md) {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    li {
       display: flex;
       align-items: center;
-			margin-bottom: 8px;
-			font-size: 20px;
-			@include breakpoint(xl) {
-				font-size: 16px;
-				margin-bottom: 4px;
-			}
-			@include breakpoint(lg) {
-				font-size: 14px;
-				margin-right: 8px;
-			}
-			@include breakpoint(sm) {
-				margin: 0 8px 8px 0;
-			}
-			&:nth-child(1) {
-				@include color($color)
-			}
-			&:nth-child(2) {
-				@include color(#FFBB77)
-			}
-			&:nth-child(3) {
-				@include color(#D26900)
-			}
-			&:nth-child(4) {
-				@include color(#FF2D2D)
-			}
-			&:nth-child(5) {
-				@include color(#AE0000)
-			}
-			&:nth-child(6) {
-				@include color(#2F0000)
-			}
-		}
-	}
+      margin-bottom: 8px;
+      font-size: 20px;
+      @include breakpoint(xl) {
+        font-size: 16px;
+        margin-bottom: 4px;
+      }
+      @include breakpoint(lg) {
+        font-size: 14px;
+        margin-right: 8px;
+      }
+      @include breakpoint(sm) {
+        margin: 0 8px 8px 0;
+      }
+      &:nth-child(1) {
+        @include color($color)
+      }
+      &:nth-child(2) {
+        @include color(#FFBB77)
+      }
+      &:nth-child(3) {
+        @include color(#D26900)
+      }
+      &:nth-child(4) {
+        @include color(#FF2D2D)
+      }
+      &:nth-child(5) {
+        @include color(#AE0000)
+      }
+      &:nth-child(6) {
+        @include color(#2F0000)
+      }
+    }
+  }
 }
 
 @mixin flex-center {
