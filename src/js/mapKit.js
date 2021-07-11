@@ -1,6 +1,6 @@
 /* eslint-disable */
 //套件方法
-import mapConfig from './data.js';
+import mapConfig from './dataWorld.js';
 import $ from "jquery";
 
 const pin_config = {

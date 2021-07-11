@@ -1,5 +1,5 @@
 import { CountUp } from 'countup.js';
-import mapConfig from './data.js';
+import mapConfig from './dataWorld.js';
 import addEvent from './mapKit.js';
 
 const totalWorld = document.querySelector('#total-world');
