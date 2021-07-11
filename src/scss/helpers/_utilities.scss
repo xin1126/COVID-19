@@ -2,6 +2,12 @@
   display: none;
 }
 
+.d-xl-none {
+  @include breakpoint(xl) {
+    display: none;
+  }
+}
+
 .d-lg-none {
   @include breakpoint(lg) {
     display: none;

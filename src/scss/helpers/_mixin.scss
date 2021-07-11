@@ -32,12 +32,12 @@
   }
 }
 
-@mixin color-base($px,$color) {
+@mixin color-base($px,$color,$breakpoint) {
   position: absolute;
   padding: 10px;
   bottom: $px;
   left: 0;
-  @include breakpoint(md) {
+  @include breakpoint($breakpoint) {
     position: initial;
     text-align: center;
   }
@@ -52,12 +52,12 @@
       font-size: 18px;
       margin-bottom: 4px;
     }
-    @include breakpoint(md) {
+    @include breakpoint($breakpoint) {
       margin-bottom: 8px;
     }
   }
   ul {
-    @include breakpoint(md) {
+    @include breakpoint($breakpoint) {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;

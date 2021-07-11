@@ -3,11 +3,28 @@ import dataTw from './dataTw.js';
 const path = document.querySelectorAll('path');
 const error = document.querySelector('.error');
 const contentTw = document.querySelector('.content-tw');
+const tableTw = document.querySelector('#table-tw');
 
 const totalTownship = {};
 const newTotalTownship = {};
 
-const mapTw = () => {
+const renderTableTw = (date) => {
+  const newArr = Object.entries(totalTownship).sort((a, b) => b[1] - a[1]);
+  console.log(newArr);
+  let str = '';
+  newArr.forEach((item, index) => {
+    str += `<tr>
+      <td>${index + 1}</td>
+      <td>${item[0]}</td>
+      <td>${item[1].toLocaleString()}</td>
+      <td class="d-xl-none">${date}</td>
+    </tr>`;
+  });
+  console.log(str);
+  tableTw.innerHTML = str;
+};
+
+const mapTwContent = () => {
   let tempColor;
   window.onload = () => {
     document.onmousemove = (e) => {
@@ -75,6 +92,7 @@ const processTwData = (data) => {
     totalTownship[item[0]] = Object.values(item[1]).reduce((a, b) => a + b);
   });
   mapTwColor();
+  renderTableTw(data.meta.modified);
 };
 
 const getTotalTwData = () => {
@@ -89,5 +107,5 @@ const getTotalTwData = () => {
 
 if (window.location.href.indexOf('taiwan') > 0) {
   getTotalTwData();
-  mapTw();
+  mapTwContent();
 }
