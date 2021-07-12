@@ -1,11 +1,11 @@
 import { CountUp } from 'countup.js';
 
-export default (data, document) => {
+export default (data, document, date) => {
   const dom = document;
   dom.innerHTML = `
     <ul class="total-data">
-      <li><p>今日新增確診數</p><span id="todayCases"></span></li>
-      <li><p>今日新增死亡數</p><span id="todayDeaths"></span></li>
+      <li><p>${date}新增確診數</p><span id="todayCases"></span></li>
+      <li><p>${date}新增死亡數</p><span id="todayDeaths"></span></li>
       <li><p>總確診數</p><span id="cases"></span></li>
       <li><p>總死亡數</p><span id="deaths"></span></li>
     </ul>

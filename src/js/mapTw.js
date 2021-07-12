@@ -1,5 +1,8 @@
+import * as c3 from 'c3';
+import 'c3/c3.min.css';
 import dataTw from './dataTw.js';
-import renderTotalTwData from './renderTotalData .js';
+import renderTotalTwData from './renderTotalData.js';
+import { processChartData, newChartData } from './ChartData.js';
 
 const path = document.querySelectorAll('path');
 const error = document.querySelector('.error');
@@ -9,6 +12,33 @@ const totalTw = document.querySelector('#total-tw');
 
 const totalTownship = {};
 const newTotalTownship = {};
+
+const renderChartTwData = (data) => {
+  const sick = processChartData(data, 'cases');
+  const death = processChartData(data, 'deaths');
+  const newDate = newChartData(sick, 0, 'x');
+  const newSick = newChartData(sick, 1, '新增確診數');
+  const newDeath = newChartData(death, 1, '新增死亡數');
+  c3.generate({
+    data: {
+      x: 'x',
+      columns: [
+        newDate,
+        newSick,
+        newDeath,
+      ],
+    },
+    axis: {
+      x: {
+        type: 'timeseries',
+        labels: true,
+        tick: {
+          format: '%m-%d',
+        },
+      },
+    },
+  });
+};
 
 const renderTableTw = (date) => {
   const newArr = Object.entries(totalTownship).sort((a, b) => b[1] - a[1]);
@@ -104,15 +134,28 @@ const getTownshipTwData = () => {
 };
 
 const getTotalTwData = () => {
-  const url = 'https://disease.sh/v3/covid-19/countries/TW?strict=true';
+  const url = 'https://disease.sh/v3/covid-19/countries/TW?yesterday=true&strict=true';
   fetch(`${url}`, {})
     .then((response) => response.json())
-    .then((jsonData) => renderTotalTwData(jsonData, totalTw))
+    .then((jsonData) => renderTotalTwData(jsonData, totalTw, '昨日'))
     .catch(() => { error.style.display = 'flex'; });
 };
 
-if (window.location.href.indexOf('taiwan') > 0) {
+const getDateTwData = () => {
+  const url = 'https://disease.sh/v3/covid-19/historical/TW?lastdays=200';
+  fetch(`${url}`, {})
+    .then((response) => response.json())
+    .then((jsonData) => renderChartTwData(jsonData.timeline))
+    .catch(() => { error.style.display = 'flex'; });
+};
+
+const initTw = () => {
   getTownshipTwData();
   getTotalTwData();
+  getDateTwData();
   mapTwContent();
+};
+
+if (window.location.href.indexOf('taiwan') > 0) {
+  initTw();
 }

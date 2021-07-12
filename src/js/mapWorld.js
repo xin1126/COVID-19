@@ -1,11 +1,41 @@
+import * as c3 from 'c3';
+import 'c3/c3.min.css';
 import mapConfig from './dataWorld.js';
-import renderTotalWorldData from './renderTotalData .js';
+import renderTotalWorldData from './renderTotalData.js';
+import { processChartData, newChartData } from './ChartData.js';
 import addEvent from './mapKit.js';
 
 const totalWorld = document.querySelector('#total-world');
 const tableWorld = document.querySelector('#table-world');
 const error = document.querySelector('.error');
 const totalCountry = {};
+
+const renderChartWorldData = (data) => {
+  const sick = processChartData(data, 'cases');
+  const death = processChartData(data, 'deaths');
+  const newDate = newChartData(sick, 0, 'x');
+  const newSick = newChartData(sick, 1, '新增確診數');
+  const newDeath = newChartData(death, 1, '新增死亡數');
+  c3.generate({
+    data: {
+      x: 'x',
+      columns: [
+        newDate,
+        newSick,
+        newDeath,
+      ],
+    },
+    axis: {
+      x: {
+        type: 'timeseries',
+        labels: true,
+        tick: {
+          format: '%m-%d',
+        },
+      },
+    },
+  });
+};
 
 const renderMapWorld = (map, content) => {
   mapConfig[map].hover = `
@@ -96,13 +126,22 @@ const getTotalWorldData = () => {
   const url = 'https://corona.lmao.ninja/v3/covid-19/all';
   fetch(url, {})
     .then((response) => response.json())
-    .then((jsonData) => renderTotalWorldData(jsonData, totalWorld))
+    .then((jsonData) => renderTotalWorldData(jsonData, totalWorld, '今日'))
+    .catch(() => { error.style.display = 'flex'; });
+};
+
+const getDateWorldata = () => {
+  const url = 'https://disease.sh/v3/covid-19/historical/all?lastdays=200';
+  fetch(`${url}`, {})
+    .then((response) => response.json())
+    .then((jsonData) => renderChartWorldData(jsonData))
     .catch(() => { error.style.display = 'flex'; });
 };
 
 const initWorld = () => {
   getCountries();
   getTotalWorldData();
+  getDateWorldata();
 };
 
 if (window.location.href.indexOf('world') > 0) {

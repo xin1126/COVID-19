@@ -32,6 +32,7 @@
     "webpack-cli": "^4.7.2"
   },
   "dependencies": {
+    "c3": "^0.7.20",
     "countup.js": "^2.0.7",
     "jquery": "^3.6.0"
   }
