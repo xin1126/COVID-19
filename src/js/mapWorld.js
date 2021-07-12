@@ -1,5 +1,5 @@
-import { CountUp } from 'countup.js';
-import mapConfig from './dataWorld';
+import mapConfig from './dataWorld.js';
+import renderTotalWorldData from './renderTotalData .js';
 import addEvent from './mapKit.js';
 
 const totalWorld = document.querySelector('#total-world');
@@ -23,25 +23,6 @@ const renderMapWorld = (map, content) => {
   if (!totalCountry[content.area]) {
     mapConfig[map].hover = `<p style="margin-bottom : 4px">${content.title}</p><p>未知</p>`;
   }
-};
-
-const renderTotalWorldData = (data) => {
-  totalWorld.innerHTML = `
-    <ul class="total-world">
-    <li><p>總人口數</p><span id="population"></span></li>
-    <li><p>總確診數</p><span id="cases"></span></li>
-    <li><p>總死亡數</p><span id="deaths"></span></li>
-    </ul>`;
-  const countOptions = {
-    useEasing: true,
-    separator: '',
-  };
-  const population = new CountUp('population', data.population, 0, 5, countOptions);
-  const cases = new CountUp('cases', data.cases, 0, 5, countOptions);
-  const deaths = new CountUp('deaths', data.deaths, 0, 5, countOptions);
-  population.start();
-  cases.start();
-  deaths.start();
 };
 
 const renderTableWorld = (data) => {
@@ -115,7 +96,7 @@ const getTotalWorldData = () => {
   const url = 'https://corona.lmao.ninja/v3/covid-19/all';
   fetch(url, {})
     .then((response) => response.json())
-    .then((jsonData) => renderTotalWorldData(jsonData))
+    .then((jsonData) => renderTotalWorldData(jsonData, totalWorld))
     .catch(() => { error.style.display = 'flex'; });
 };
 

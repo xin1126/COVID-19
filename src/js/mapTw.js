@@ -1,16 +1,17 @@
 import dataTw from './dataTw.js';
+import renderTotalTwData from './renderTotalData .js';
 
 const path = document.querySelectorAll('path');
 const error = document.querySelector('.error');
 const contentTw = document.querySelector('.content-tw');
 const tableTw = document.querySelector('#table-tw');
+const totalTw = document.querySelector('#total-tw');
 
 const totalTownship = {};
 const newTotalTownship = {};
 
 const renderTableTw = (date) => {
   const newArr = Object.entries(totalTownship).sort((a, b) => b[1] - a[1]);
-  console.log(newArr);
   let str = '';
   newArr.forEach((item, index) => {
     str += `<tr>
@@ -20,7 +21,6 @@ const renderTableTw = (date) => {
       <td class="d-xl-none">${date}</td>
     </tr>`;
   });
-  console.log(str);
   tableTw.innerHTML = str;
 };
 
@@ -95,17 +95,24 @@ const processTwData = (data) => {
   renderTableTw(data.meta.modified);
 };
 
-const getTotalTwData = () => {
+const getTownshipTwData = () => {
   const url = 'https://kiang.github.io/od.cdc.gov.tw/data/od/confirmed/2021.json';
   fetch(`${url}`, {})
     .then((response) => response.json())
-    .then((jsonData) => {
-      processTwData(jsonData);
-    })
+    .then((jsonData) => processTwData(jsonData))
+    .catch(() => { error.style.display = 'flex'; });
+};
+
+const getTotalTwData = () => {
+  const url = 'https://disease.sh/v3/covid-19/countries/TW?strict=true';
+  fetch(`${url}`, {})
+    .then((response) => response.json())
+    .then((jsonData) => renderTotalTwData(jsonData, totalTw))
     .catch(() => { error.style.display = 'flex'; });
 };
 
 if (window.location.href.indexOf('taiwan') > 0) {
+  getTownshipTwData();
   getTotalTwData();
   mapTwContent();
 }

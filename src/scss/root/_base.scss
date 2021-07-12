@@ -1,0 +1,58 @@
+.date {
+  text-align: center;
+  color: gray;
+  margin-bottom: 24px;
+  @include breakpoint(lg) {
+    font-size: 14px;
+  }
+}
+
+.total-data {
+  display: flex;
+  justify-content:space-between;
+  margin-bottom: 24px;
+  @include breakpoint(sm) {
+    flex-flow: column;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  li {
+    margin-right: 10px;
+    font-size: 48px;
+    text-align: center;
+    color: darkred;
+    @include breakpoint(lg) {
+      font-size: 32px;
+      width: 50%;
+      margin: 0 auto;
+      padding-bottom: 10px;
+    }
+    @include breakpoint(md) {
+      font-size: 24px;
+    }
+    @include breakpoint(sm) {
+      margin-bottom: 16px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    p {
+      color: black;
+      text-align: center;
+      font-weight: bolder;
+      margin-bottom: 8px;
+      font-size: 24px;
+      @include breakpoint(md) {
+        font-size: 18px;
+      }
+    }
+    span {
+      display: block;
+      @include breakpoint(sm) {
+        display: inline-block;
+        padding: 0 6px 4px;
+        border-bottom: gray solid 1px;
+      }
+    }
+  }
+}

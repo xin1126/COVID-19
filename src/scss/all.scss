@@ -1,5 +1,6 @@
-@import "./reset";
 @import "./helpers/mixin";
+@import "./root/reset";
+@import "./root/base";
 @import "./helpers/grid";
 @import "./helpers/utilities";
 @import "./layout/mapWorld";

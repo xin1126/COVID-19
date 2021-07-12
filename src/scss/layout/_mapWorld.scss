@@ -68,64 +68,6 @@
 	}
 }
 
-.total-world {
-	display: flex;
-	justify-content: space-around;
-	margin-bottom: 24px;
-	@include breakpoint(sm) {
-		flex-flow: column;
-		align-items: center;
-		margin-bottom: 16px;
-	}
-	li {
-		margin-right: 10px;
-		font-size: 48px;
-		text-align: center;
-		@include breakpoint(lg) {
-			font-size: 40px;
-			width: 50%;
-			margin: 0 auto;
-			padding-bottom: 10px;
-		}
-		@include breakpoint(md) {
-			font-size: 28px;
-		}
-		@include breakpoint(sm) {
-			margin-bottom: 16px;
-			&:last-child {
-				margin-bottom: 0;
-			}
-		}
-		&:nth-child(1) {
-			color: green;
-		}
-		&:nth-child(2) {
-			color: darkred;
-		}
-		&:nth-child(3) {
-			color: darkred;
-		}
-		p {
-			color: black;
-			text-align: center;
-			font-weight: bolder;
-			margin-bottom: 8px;
-			font-size: 24px;
-			@include breakpoint(md) {
-				font-size: 18px;
-			}
-		}
-		span {
-			display: block;
-			@include breakpoint(sm) {
-				display: inline-block;
-				padding: 0 6px 4px;
-				border-bottom: gray solid 1px;
-			}
-		}
-	}
-}
-
 .table-world {
 	width: 100%;
 	thead {
